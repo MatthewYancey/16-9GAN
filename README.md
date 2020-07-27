@@ -11,6 +11,7 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 ### Model
 * architecture: using a 256 size
 * cost functions
+   * Image difference
 * stoping condition
     * can just be image simmilarity, when that score discontinues to improve. 
 * metrics
@@ -22,19 +23,17 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 256 x 256 image convolution layers doubling 3 to 24 at 32 pixels.
 
 ## Notebooks
-* 001 using image simularity to train
-* 002 Using GANs
+* process_freams.ipynb: Takes the video files and converts them to frames. 
+* model_image_difference.ipynb: model that uses the MSE of the original image and the generated image as the loss. This method only has a generator and not a discrimiator.
 
-## Results
+## Results to show
 * Results over time
 * Example on the 16:9
 * Example on the 4:3
     * fixed background vs action sceen
-* Simpsons job that got cropped
+* Look at other animated shows (Simpsons etc)
 
 ## Backlog
-* More data - Remove everything from google drive except the 16:9 images
-
-* Review stopping conditions
-* Review different types of architecture
 * try just using a generator and having the image difference be the cost function
+* try the GANs approach
+* read up on different architecture
