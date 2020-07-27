@@ -1,7 +1,7 @@
 # 16:9GAN
 
 ## Overview
-Prior to 2009, most television was done in 4:3 aspect ratio, aposted to the current standard of 16:9. 16:9GAN takes in old 4:3 animated video and converts it to 16:9 by generating feasible animation for the sides.
+Prior to 2009, most television was done in 4:3 aspect ratio, opposed to the current standard of 16:9. 16:9GAN takes in old 4:3 animated video and converts it to 16:9 by generating feasible animation for the sides.
 
 ## Methodology
 
