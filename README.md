@@ -37,3 +37,6 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 * try just using a generator and having the image difference be the cost function
 * try the GANs approach
 * read up on different architecture
+
+## Notes
+http://people.eecs.berkeley.edu/~pathak/context_encoder/#extraResults
