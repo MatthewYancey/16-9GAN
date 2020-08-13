@@ -24,7 +24,8 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 
 ## Notebooks
 * process_freams.ipynb: Takes the video files and converts them to frames. 
-* model_image_difference.ipynb: model that uses the MSE of the original image and the generated image as the loss. This method only has a generator and not a discrimiator.
+* model_image_difference_001.ipynb: model that uses the MSE of the original image and the generated image as the loss. This method only has a generator and not a discrimiator.
+* model_image_difference_002.ipynb: Sames as 001, but does not reduce the image down to a 4000 X 1 features. 
 
 ## Results to show
 * Results over time
