@@ -27,15 +27,3 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 * model_image_difference_001.ipynb: model that uses the MSE of the original image and the generated image as the loss. This method only has a generator and not a discrimiator.
 * model_image_difference_002.ipynb: Sames as 001, but does not reduce the image down to a 4000 X 1 features.
 * model_image_difference_003.ipynb: Scale down the image size to ___ and modified the network so only the sides are being generated.
-  
-## Notes
-https://towardsdatascience.com/10-papers-you-must-read-for-deep-image-inpainting-2e41c589ced0
-  
-
-## Backlog
-* Better image cleanup and removal of duplicates
-* Make a right panel gan first
-* Make a literature review section with the types and what is available. Also try to see how long they trained for and what size of images they used
-  
-  
-  
