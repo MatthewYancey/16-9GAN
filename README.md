@@ -31,3 +31,11 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 ## Notes
 https://towardsdatascience.com/10-papers-you-must-read-for-deep-image-inpainting-2e41c589ced0
   
+
+## Backlog
+* Better image cleanup and removal of duplicates
+* Make a right panel gan first
+* Make a literature review section with the types and what is available. Also try to see how long they trained for and what size of images they used
+  
+  
+  
