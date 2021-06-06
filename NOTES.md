@@ -1,11 +1,11 @@
 # Project Notes
 
 ## Backlog
-* shrink the image size down
-* cut to just the sides
-* try just using a generator and having the image difference be the cost function
+* shrink the image size down to what will be in network
+* Try just a single side first
 * try the GANs approach
-* read up on different architecture
+* Better image cleanup and removal of duplicates
+
 
 ## Results to show
 * Results over time
@@ -15,10 +15,14 @@
 * Look at other animated shows (Simpsons etc)
 * Look at the wizard of oz
 
-## Links
-Berkey's project of filling in missing information from images. 
-http://people.eecs.berkeley.edu/~pathak/context_encoder/#extraResults
+## Links and Literature
+Berkey's project of filling in missing information from images. http://people.eecs.berkeley.edu/~pathak/context_encoder/#extraResults
+Medium article reviewing different types of inpainting https://towardsdatascience.com/10-papers-you-must-read-for-deep-image-inpainting-2e41c589ced0
+Globally and Locally Consistent Inpainting http://iizuka.cs.tsukuba.ac.jp/projects/completion/data/completion_sig2017.pdf
+- Some tests were run on 100k images for 500 epochs
+- How is masking done? The input of the completion network is an RGB image with a binary channel that indicates the image completion mask (1 for a pixel to be completed)
+- They did do some networks with just weighted MSE (what is the weighting?)
 
 ## Notes
-Looked into OpenAI's Image GPT (https://openai.com/blog/image-gpt/). It may take too long to run even if it's just transfer learning on this model.
+Looked into OpenAI's Image GPT (https://openai.com/blog/image-gpt/). It may take too long to train even if it's just transfer learning on this model.
 Code is on github (https://github.com/openai/image-gpt). Was created with TensorFlow.
