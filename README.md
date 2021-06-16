@@ -27,3 +27,11 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 * model_image_difference_001.ipynb: model that uses the MSE of the original image and the generated image as the loss. This method only has a generator and not a discrimiator.
 * model_image_difference_002.ipynb: Sames as 001, but does not reduce the image down to a 4000 X 1 features.
 * model_image_difference_003.ipynb: Scale down the image size to ___ and modified the network so only the sides are being generated.
+  
+  
+  # backlog
+  pick a better logging image
+  have the images load to the cuda from the start
+  setup tensorboard
+  cleanup checkpoints and make it a function
+  check the images, it looks like they might be croppe3d on the top (see image at index 2)
