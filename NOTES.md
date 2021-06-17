@@ -1,11 +1,7 @@
 # Project Notes
 
 ## Backlog
-* shrink the image size down to what will be in network
-* Try just a single side first
-* try the GANs approach
-* Better image cleanup and removal of duplicates
-
+* Use image hash
 
 ## Results to show
 * Results over time
@@ -26,3 +22,4 @@ Globally and Locally Consistent Inpainting http://iizuka.cs.tsukuba.ac.jp/projec
 ## Notes
 Looked into OpenAI's Image GPT (https://openai.com/blog/image-gpt/). It may take too long to train even if it's just transfer learning on this model.
 Code is on github (https://github.com/openai/image-gpt). Was created with TensorFlow.
+30 is the largest batch size
