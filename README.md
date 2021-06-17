@@ -28,10 +28,7 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 * model_image_difference_002.ipynb: Sames as 001, but does not reduce the image down to a 4000 X 1 features.
 * model_image_difference_003.ipynb: Scale down the image size to ___ and modified the network so only the sides are being generated.
   
-  
-  # backlog
-  pick a better logging image
-  have the images load to the cuda from the start
-  setup tensorboard
-  cleanup checkpoints and make it a function
-  check the images, it looks like they might be croppe3d on the top (see image at index 2)
+## backlog
+* Need to have two different loss functions, one for the gen and one for the disc
+* pick a better logging image
+* have the images load to the cuda from the start
