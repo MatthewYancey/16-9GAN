@@ -29,6 +29,8 @@ For data, still frame images where taken from the Fullmetal Alchemist (2003) and
 * model_image_difference_003.ipynb: Scale down the image size to ___ and modified the network so only the sides are being generated.
   
 ## backlog
+* Change the range of values back to the range of colors
+* change the area the NN is covering
 * Need to have two different loss functions, one for the gen and one for the disc
 * pick a better logging image
 * have the images load to the cuda from the start
