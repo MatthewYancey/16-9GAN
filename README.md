@@ -9,6 +9,9 @@
 ## How we built it
 
 ## Challenges we ran into
+getting the models to train correctly
+scaling images correctly so that spot checking was correctly showing what I was seeing
+
 
 ## Accomplishments that we're proud of
 

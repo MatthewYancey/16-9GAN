@@ -7,29 +7,41 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
-   version="1.1"
-   id="svg8"
+   sodipodi:docname="logo.svg"
    inkscape:version="1.0 (4035a4f, 2020-05-01)"
-   sodipodi:docname="logo.svg">
+   id="svg8"
+   version="1.1"
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm">
   <defs
      id="defs2">
     <rect
-       x="67.865274"
-       y="34.66954"
-       width="58.531167"
+       id="rect1003"
        height="38.038241"
-       id="rect1003" />
+       width="58.531167"
+       y="34.66954"
+       x="67.865274" />
     <rect
-       id="rect1003-5"
+       x="67.865273"
+       y="34.66954"
+       width="58.531166"
+       height="38.038242"
+       id="rect1003-5" />
+    <rect
+       x="67.865273"
+       y="34.66954"
+       width="58.531166"
+       height="38.038242"
+       id="rect153" />
+    <rect
+       id="rect1003-5-9"
        height="38.038242"
        width="58.531166"
        y="34.66954"
        x="67.865273" />
     <rect
-       id="rect153"
+       id="rect1149"
        height="38.038242"
        width="58.531166"
        y="34.66954"
@@ -39,46 +51,34 @@
        y="34.66954"
        width="58.531166"
        height="38.038242"
-       id="rect1003-5-9" />
+       id="rect1003-8" />
     <rect
        x="67.865273"
        y="34.66954"
        width="58.531166"
        height="38.038242"
-       id="rect1149" />
-    <rect
-       id="rect1003-8"
-       height="38.038242"
-       width="58.531166"
-       y="34.66954"
-       x="67.865273" />
-    <rect
-       id="rect1250"
-       height="38.038242"
-       width="58.531166"
-       y="34.66954"
-       x="67.865273" />
+       id="rect1250" />
   </defs>
   <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="3.77"
-     inkscape:cx="364.81932"
-     inkscape:cy="264.13101"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     inkscape:document-rotation="0"
-     showgrid="false"
-     inkscape:snap-page="true"
-     inkscape:window-width="3440"
-     inkscape:window-height="1387"
-     inkscape:window-x="0"
+     inkscape:window-maximized="0"
      inkscape:window-y="25"
-     inkscape:window-maximized="1" />
+     inkscape:window-x="0"
+     inkscape:window-height="1387"
+     inkscape:window-width="3440"
+     inkscape:snap-page="true"
+     showgrid="false"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="g1239"
+     inkscape:document-units="mm"
+     inkscape:cy="264.13101"
+     inkscape:cx="364.81932"
+     inkscape:zoom="3.77"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -92,154 +92,154 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Layer 1"
+     id="layer1"
      inkscape:groupmode="layer"
-     id="layer1">
+     inkscape:label="Layer 1">
     <rect
-       style="mix-blend-mode:normal;fill:#000000;stroke:#000000;stroke-width:0.78544;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       y="69.890953"
-       x="136.28674"
-       height="29.21456"
-       width="39.214558"
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        id="rect10-1"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       width="39.214558"
+       height="29.21456"
+       x="136.28674"
+       y="69.890953"
+       style="mix-blend-mode:normal;fill:#000000;stroke:#000000;stroke-width:0.78544;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
-       id="path891-55"
-       d="m 182.47569,69.498231 v 30"
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       d="m 182.47569,69.498231 v 30"
+       id="path891-55" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 176.93555,69.498231 V 99.498232"
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        id="path891-8-8"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       d="M 176.93555,69.498231 V 99.498232"
+       style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 178.62894,69.498231 V 99.498232"
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        id="path891-7-5"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       d="M 178.62894,69.498231 V 99.498232"
+       style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
-       id="path891-7-6-6"
-       d="M 180.44985,69.498231 V 99.498232"
+       inkscape:export-ydpi="96"
+       inkscape:export-xdpi="96"
        style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96" />
+       d="M 180.44985,69.498231 V 99.498232"
+       id="path891-7-6-6" />
     <g
-       transform="translate(-1.83128,32.774646)"
-       id="g981-7"
+       inkscape:export-ydpi="96"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96">
+       id="g981-7"
+       transform="translate(-1.83128,32.774646)">
       <path
-         id="path891-5-9"
+         style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          d="M 131.14363,66.723586 V 36.723585"
-         style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+         id="path891-5-9" />
       <path
-         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path891-8-0-4"
          d="M 136.68377,66.723586 V 36.723585"
-         id="path891-8-0-4" />
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
-         style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         id="path891-7-0-1"
          d="M 134.99038,66.723586 V 36.723585"
-         id="path891-7-0-1" />
+         style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
-         id="path891-7-6-8-61"
+         style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          d="M 133.16947,66.723586 V 36.723585"
-         style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         id="path891-7-6-8-61" />
     </g>
     <text
-       style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003-8);fill:#ffffff;fill-opacity:1;stroke:none;"
-       id="text1001-20"
-       xml:space="preserve"
-       x="20.854708"
-       y="0"
-       transform="translate(69.706384,45.177627)"
+       inkscape:export-ydpi="96"
        inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96"><tspan
+       transform="translate(69.706384,45.177627)"
+       y="0"
+       x="20.854708"
+       xml:space="preserve"
+       id="text1001-20"
+       style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003-8);fill:#ffffff;fill-opacity:1;stroke:none;"><tspan
          x="67.865234"
          y="42.394322"><tspan
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff">GAN</tspan><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:sans-serif;fill:#ffffff">IME</tspan></tspan></text>
     <rect
-       style="mix-blend-mode:normal;fill:none;stroke:#000000;stroke-width:0.90629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       y="63.062122"
-       x="58.247135"
-       height="29.09371"
+       id="rect10-7"
        width="52.427048"
-       id="rect10-7" />
+       height="29.09371"
+       x="58.247135"
+       y="63.062122"
+       style="mix-blend-mode:normal;fill:none;stroke:#000000;stroke-width:0.90629;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <g
-       transform="translate(79.213195,-2.7370663)"
-       id="g1206">
+       id="g1206"
+       transform="translate(79.213195,-2.7370663)">
       <g
-         transform="translate(-0.07018126,-75.865937)"
-         id="g1223">
+         id="g1223"
+         transform="translate(-0.07018126,-75.865937)">
         <rect
-           transform="translate(-79.213195,2.7370663)"
-           style="mix-blend-mode:normal;fill:#000000;stroke:#000000;stroke-width:0.906291;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           y="106.65617"
-           x="119.06168"
-           height="29.09371"
+           id="rect10-7-5"
            width="52.427048"
-           id="rect10-7-5" />
+           height="29.09371"
+           x="119.06168"
+           y="106.65617"
+           style="mix-blend-mode:normal;fill:#000000;stroke:#000000;stroke-width:0.906291;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           transform="translate(-79.213195,2.7370663)" />
         <path
-           id="path891-54"
-           d="M 92.643681,108.94009 V 138.9401"
+           inkscape:export-ydpi="96"
+           inkscape:export-xdpi="96"
            style="fill:none;stroke:#ffffff;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96" />
+           d="M 92.643681,108.94009 V 138.9401"
+           id="path891-54" />
         <path
-           style="fill:none;stroke:#ffffff;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 87.103541,108.94009 V 138.9401"
+           inkscape:export-ydpi="96"
+           inkscape:export-xdpi="96"
            id="path891-8-2"
-           inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96" />
+           d="M 87.103541,108.94009 V 138.9401"
+           style="fill:none;stroke:#ffffff;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <path
-           style="fill:none;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="M 88.796931,108.94009 V 138.9401"
+           inkscape:export-ydpi="96"
+           inkscape:export-xdpi="96"
            id="path891-7-1"
-           inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96" />
+           d="M 88.796931,108.94009 V 138.9401"
+           style="fill:none;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <path
-           id="path891-7-6-9"
-           d="M 90.617841,108.94009 V 138.9401"
+           inkscape:export-ydpi="96"
+           inkscape:export-xdpi="96"
            style="fill:none;stroke:#ffffff;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96" />
+           d="M 90.617841,108.94009 V 138.9401"
+           id="path891-7-6-9" />
         <g
-           style="fill:#ffffff;stroke:#ffffff"
-           transform="translate(-91.663286,72.216512)"
-           id="g981-2"
+           inkscape:export-ydpi="96"
            inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96">
+           id="g981-2"
+           transform="translate(-91.663286,72.216512)"
+           style="fill:#ffffff;stroke:#ffffff">
           <path
-             id="path891-5-4"
+             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              d="M 131.14363,66.723586 V 36.723585"
-             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+             id="path891-5-4" />
           <path
-             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path891-8-0-5"
              d="M 136.68377,66.723586 V 36.723585"
-             id="path891-8-0-5" />
+             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
           <path
-             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             id="path891-7-0-8"
              d="M 134.99038,66.723586 V 36.723585"
-             id="path891-7-0-8" />
+             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
           <path
-             id="path891-7-6-8-6"
+             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
              d="M 133.16947,66.723586 V 36.723585"
-             style="fill:#ffffff;stroke:#ffffff;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+             id="path891-7-6-8-6" />
         </g>
         <text
-           style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003-5);fill:#ffffff;fill-opacity:1;stroke:none;"
-           id="text1001-2"
-           xml:space="preserve"
-           x="20.854708"
-           y="0"
-           transform="translate(-20.125625,84.619499)"
+           inkscape:export-ydpi="96"
            inkscape:export-xdpi="96"
-           inkscape:export-ydpi="96"><tspan
+           transform="translate(-20.125625,84.619499)"
+           y="0"
+           x="20.854708"
+           xml:space="preserve"
+           id="text1001-2"
+           style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003-5);fill:#ffffff;fill-opacity:1;stroke:none;"><tspan
              x="67.865234"
              y="42.394322"><tspan
                style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff">GAN</tspan><tspan
@@ -249,70 +249,70 @@
     <g
        id="g1239">
       <rect
-         style="mix-blend-mode:normal;fill:none;stroke:#000000;stroke-width:0.78544;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         y="30.391251"
-         x="64.853378"
-         height="29.21456"
-         width="39.214558"
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
          id="rect10"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         width="39.214558"
+         height="29.21456"
+         x="64.853378"
+         y="30.391251"
+         style="mix-blend-mode:normal;fill:none;stroke:#000000;stroke-width:0.78544;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
-         id="path891"
-         d="m 111.04233,29.998531 v 30"
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
          style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         d="m 111.04233,29.998531 v 30"
+         id="path891" />
       <path
-         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-         d="M 105.50219,29.998531 V 59.998532"
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
          id="path891-8"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         d="M 105.50219,29.998531 V 59.998532"
+         style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
       <path
-         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="M 107.19558,29.998531 V 59.998532"
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
          id="path891-7"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         d="M 107.19558,29.998531 V 59.998532"
+         style="fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
-         id="path891-7-6"
-         d="M 109.01649,29.998531 V 59.998532"
+         inkscape:export-ydpi="96"
+         inkscape:export-xdpi="96"
          style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96" />
+         d="M 109.01649,29.998531 V 59.998532"
+         id="path891-7-6" />
       <g
-         transform="translate(-73.264639,-6.7250544)"
-         id="g981"
+         inkscape:export-ydpi="96"
          inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96">
+         id="g981"
+         transform="translate(-73.264639,-6.7250544)">
         <path
-           id="path891-5"
+           style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 131.14363,66.723586 V 36.723585"
-           style="fill:none;stroke:#000000;stroke-width:0.170002px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+           id="path891-5" />
         <path
-           style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path891-8-0"
            d="M 136.68377,66.723586 V 36.723585"
-           id="path891-8-0" />
+           style="fill:none;stroke:#000000;stroke-width:0.7;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <path
-           style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path891-7-0"
            d="M 134.99038,66.723586 V 36.723585"
-           id="path891-7-0" />
+           style="fill:none;stroke:#000000;stroke-width:0.499999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
         <path
-           id="path891-7-6-8"
+           style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            d="M 133.16947,66.723586 V 36.723585"
-           style="fill:none;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+           id="path891-7-6-8" />
       </g>
       <text
-         style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003);fill:#000000;fill-opacity:1;stroke:none;"
-         id="text1001"
-         xml:space="preserve"
-         x="20.854708"
-         y="0"
-         transform="translate(-12.645398,5.6779242)"
+         inkscape:export-ydpi="96"
          inkscape:export-xdpi="96"
-         inkscape:export-ydpi="96"><tspan
-           x="78.783652"
+         transform="translate(-2.0620628,5.6779242)"
+         y="0"
+         x="20.854708"
+         xml:space="preserve"
+         id="text1001"
+         style="font-style:normal;font-weight:normal;font-size:8.46667000000000058px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect1003);fill:#000000;fill-opacity:1;stroke:none;"><tspan
+           x="67.865234"
            y="42.394322"><tspan
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold'">GAN</tspan><tspan
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:sans-serif;-inkscape-font-specification:sans-serif">IME</tspan></tspan></text>
