@@ -1,5 +1,24 @@
 # GANIME
 
+
+
+## Inspiration
+
+## What it does
+
+## How we built it
+
+## Challenges we ran into
+
+## Accomplishments that we're proud of
+
+## What we learned
+
+## What's next for GANime
+
+
+
+
 ## Overview
 Prior to 2009, most television was done in 4:3 aspect ratio, opposed to the current standard of 16:9. GANIME takes in old anime in 4:3 aspect ratio and converts it to 16:9 by generating feasible animation for the sides.
 

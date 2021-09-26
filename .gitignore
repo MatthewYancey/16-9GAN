@@ -1,0 +1,11 @@
+data_raw
+Notes.gsheet
+
+# tensorboard log data
+*events.out*
+
+# training data
+data_out/anime-faces.tar.gz
+data_out/test.zip
+data_out/train.zip
+data_out/validate.zip
