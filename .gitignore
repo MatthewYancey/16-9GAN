@@ -11,5 +11,3 @@ data_out/anime-faces.tar.gz
 data_out/test.zip
 data_out/train.zip
 data_out/validate.zip
-src/helper_functions.py
-.gitignore
