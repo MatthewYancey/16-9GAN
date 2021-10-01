@@ -3,7 +3,6 @@ import shutil
 from torch.utils.tensorboard import SummaryWriter
 
 
-
 # helper function for apply the mask for cutting the frame to 4:3
 def apply_mask(img_batch, img_width, single_side):
     if len(img_batch.shape) > 3:
@@ -59,6 +58,8 @@ def checkpoint(batch_counter,
                log_dir,
                gen,
                optimizer_gen,
+               disc,
+               optimizer_disc,
                dataloader_train,
                train_reference_index,
                dataloader_val,
@@ -77,7 +78,10 @@ def checkpoint(batch_counter,
 
     # saves a checkpoint
     checkpoint = {'gen_state': gen.state_dict(),
-                  'gen_optimizer': optimizer_gen.state_dict()}
+                  'gen_optimizer': optimizer_gen.state_dict(),
+                  'disc_state': disc.state_dict(),
+                  'disc_optimizer': optimizer_disc.state_dict(),
+                  'batch_counter': batch_counter}
     torch.save(checkpoint, log_dir + 'checkpoint.pt')
 
     # gets images from the dataloader
@@ -115,41 +119,39 @@ def checkpoint(batch_counter,
     train_image_gen = train_image_gen.squeeze(0)
     train_image_gen = apply_scale(train_image_gen)
     train_image_gen = apply_comp(train_image.squeeze(0), train_image_gen, img_width, single_side)
-    writer.add_image(f'batch_{batch_counter}_train', train_image_gen)
+    writer.add_image('train', train_image_gen, batch_counter)
 
     val_image_gen = val_image_gen.squeeze(0)
     val_image_gen = apply_scale(val_image_gen)
     val_image_gen = apply_comp(val_image.squeeze(0), val_image_gen, img_width, single_side)
-    writer.add_image(f'batch_{batch_counter}_val', val_image_gen)
+    writer.add_image('val', val_image_gen, batch_counter)
 
     test_image_gen = test_image_gen.squeeze(0)
     test_image_gen = apply_scale(test_image_gen)
     test_image_gen = apply_comp(test_image.squeeze(0), test_image_gen, img_width, single_side)
-    writer.add_image(f'batch_{batch_counter}_test', test_image_gen)
-
-    # saves the epoch counter
-    with open(log_dir + '/itercount.txt', 'w') as f:
-        f.write(str(batch_counter))
+    writer.add_image('test', test_image_gen, batch_counter)
 
     writer.close()
     print('Saved checkpoint')
 
 
-def load_checkpoint(checkpoint_type, log_dir, gen, optimizer_gen):
-    if checkpoint_type == 'prev_checkpoint':
+def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, optimizer_disc=None):
+    if prev_checkpoint is not None:
         # loads the model weights
-        saved_checkpoint = torch.load(log_dir + 'checkpoint.pt')
-        gen.load_state_dict(saved_checkpoint['gen_state'])
-        optimizer_gen.load_state_dict(saved_checkpoint['gen_optimizer'])
-        print('Checkpoint Loaded')
+        checkpoint = torch.load(prev_checkpoint)
+        gen.load_state_dict(checkpoint['gen_state'])
+        optimizer_gen.load_state_dict(checkpoint['gen_optimizer'])
+        if disc is not None:
+            disc.load_state_dict(checkpoint['disc_state'])
+            optimizer_disc.load_state_dict(checkpoint['disc_optimizer'])
 
-        # loads the epoch counter
-        with open(log_dir + 'itercount.txt', 'r') as f:
-            batch_counter = int(f.read())
-        # moves it up one becuase it's currenlty at the last epoch we did
+        # loads the batch counter and incraments it because we at the last epoch we did
+        batch_counter = checkpoint['batch_counter']
         batch_counter += 1
 
-    elif checkpoint_type == 'none':
+        print(f'Loaded checkpoint from {prev_checkpoint}')
+
+    elif prev_checkpoint is None:
         # remove all previous logs
         try:
             shutil.rmtree(log_dir)
@@ -157,9 +159,6 @@ def load_checkpoint(checkpoint_type, log_dir, gen, optimizer_gen):
         except FileNotFoundError:
             print('No log folder found')
 
-        batch_counter = 1
+        batch_counter = 0
 
-    else:
-        print('Failed to specify a type')
-
-    return gen, optimizer_gen, batch_counter
+    return gen, optimizer_gen, disc, optimizer_disc, batch_counter
