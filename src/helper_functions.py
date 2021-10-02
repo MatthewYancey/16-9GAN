@@ -5,6 +5,7 @@ from torch.utils.tensorboard import SummaryWriter
 
 # helper function for apply the mask for cutting the frame to 4:3
 def apply_mask(img_batch, img_width, single_side):
+    # checks if this is a single image or batch
     if len(img_batch.shape) > 3:
         img_batch[:, :, :, (img_width - single_side):] = -1
         img_batch[:, :, :, :single_side] = -1
@@ -25,6 +26,7 @@ def apply_padding(img, img_height, single_side):
 
 
 def apply_comp(img, img_gen, img_width, single_side):
+    # checks if this is a single image or batch
     if len(img.shape) > 3:
         comp_img = torch.cat((img_gen[:, :, :, :single_side],
                               img[:, :, :, single_side:(img_width - single_side)],
@@ -112,9 +114,9 @@ def checkpoint(batch_counter,
         writer.add_image('.Reference Test Image', test_image.squeeze(0))
 
     with torch.no_grad():
-        _, train_image_gen = gen(apply_mask(train_image, img_width, single_side))
-        _, val_image_gen = gen(apply_mask(val_image, img_width, single_side))
-        _, test_image_gen = gen(test_image)
+        train_image_gen = gen(apply_mask(train_image, img_width, single_side))
+        val_image_gen = gen(apply_mask(val_image, img_width, single_side))
+        test_image_gen = gen(test_image)
 
     train_image_gen = train_image_gen.squeeze(0)
     train_image_gen = apply_scale(train_image_gen)

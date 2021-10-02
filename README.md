@@ -1,5 +1,8 @@
 # GANIME
 
+add local discriminator
+add drop out rate
+use adaptive L2 regulation
 
 
 ## Inspiration
@@ -7,10 +10,14 @@
 ## What it does
 
 ## How we built it
+used paper X
 
 ## Challenges we ran into
 getting the models to train correctly
 scaling images correctly so that spot checking was correctly showing what I was seeing
+
+Generator being too good
+https://github.com/magenta/magenta/blob/main/magenta/reviews/GAN.md
 
 
 ## Accomplishments that we're proud of

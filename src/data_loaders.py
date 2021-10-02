@@ -35,7 +35,7 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
         # transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
-    dataloader_train = torch.utils.data.DataLoader(dataset, batch_size=batch_size // 2, shuffle=True, num_workers=n_workers)
+    dataloader_train = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_train.dataset)}')
 
     # validation dataset
@@ -48,7 +48,7 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
 
-    dataloader_val = torch.utils.data.DataLoader(dataset, batch_size=batch_size // 2, shuffle=True, num_workers=n_workers)
+    dataloader_val = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_val.dataset)}')
 
     # test dataset
@@ -61,7 +61,7 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
 
-    dataloader_test = torch.utils.data.DataLoader(dataset, batch_size=batch_size // 2, shuffle=True, num_workers=n_workers)
+    dataloader_test = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_test.dataset)}')
 
     return dataloader_train, dataloader_val, dataloader_test
