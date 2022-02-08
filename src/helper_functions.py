@@ -80,12 +80,12 @@ def checkpoint(batch_counter,
     # saves the gradients of the generator
     for tag, value in gen.named_parameters():
         if value.grad is not None:
-            writer.add_histogram(tag + '/grad/gen', value.grad.cpu(), batch_counter)
+            writer.add_histogram('gen/' + tag, value.grad.cpu(), batch_counter)
 
     # saves the gradients of the discriminator
     for tag, value in disc.named_parameters():
         if value.grad is not None:
-            writer.add_histogram(tag + '/grad/disc', value.grad.cpu(), batch_counter)
+            writer.add_histogram('disc/' + tag, value.grad.cpu(), batch_counter)
 
     # saves loss to the tensorboard log
     writer.add_scalar('Disc/Loss', disc_loss, batch_counter)
