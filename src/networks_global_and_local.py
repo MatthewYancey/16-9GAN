@@ -19,10 +19,10 @@ class Generator(nn.Module):
         self.img_width = img_width
         self.single_side = single_side
 
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=5, stride=1, padding=1, bias=False)
-        self.conv2 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1, bias=False)
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=5, stride=1, padding=2, bias=False)
+        self.conv2 = nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False)
         self.conv3 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=False)
-        self.conv4 = nn.Conv2d(128, 256, kernel_size=3, stride=2, padding=1, bias=False)
+        self.conv4 = nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False)
         self.conv5 = nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False)
         self.conv6 = nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False)
 
@@ -169,29 +169,29 @@ class Discriminator(nn.Module):
         self.dropout = dropout
 
         self.global_disc = nn.Sequential(
-            nn.Conv2d(3, 64, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.Conv2d(64, 128, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.Conv2d(128, 256, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(256),
             nn.ReLU(),
-            nn.Conv2d(256, 512, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
-            nn.Conv2d(512, 512, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
-            nn.Conv2d(512, 512, kernel_size=5, stride=2, padding=1, bias=False),
+            nn.Conv2d(512, 1024, kernel_size=(9, 16), stride=1, padding=0, bias=False),
             nn.Dropout(self.dropout),
-            nn.BatchNorm2d(512),
+            nn.BatchNorm2d(1024),
             nn.ReLU()
         )
 
@@ -215,11 +215,15 @@ class Discriminator(nn.Module):
             nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1, bias=False),
             nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
+            nn.ReLU(),
+            nn.Conv2d(512, 1024, kernel_size=(9, 2), stride=1, padding=0, bias=False),
+            nn.Dropout(self.dropout),
+            nn.BatchNorm2d(1024),
             nn.ReLU()
         )
 
         self.concat_net = nn.Sequential(
-            nn.Linear(9216 + (4096 * 2), 1),
+            nn.Linear(1024*3, 1),
             nn.Sigmoid()
         )
 
