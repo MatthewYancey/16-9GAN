@@ -1,6 +1,7 @@
 import torch
 import shutil
 from torch.utils.tensorboard import SummaryWriter
+import subprocess
 
 
 # helper function for apply the mask for cutting the frame to 4:3
@@ -55,8 +56,11 @@ def apply_scale(img_tensor, plot=False):
 
 def checkpoint(batch_counter,
                disc_loss,
-               train_loss,
-               val_loss,
+               disc_accuracy,
+               gen_train_loss,
+               gen_train_loss_l2,
+               gen_val_loss,
+               gen_val_loss_l2,
                log_dir,
                gen,
                optimizer_gen,
@@ -66,17 +70,31 @@ def checkpoint(batch_counter,
                train_reference_index,
                dataloader_val,
                val_reference_index,
-               dataloader_test,
-               test_reference_index,
                img_height,
                img_width,
                single_side):
 
-    # saves loss to the tensorboard log
+    # opens the writer
     writer = SummaryWriter(log_dir)
-    writer.add_scalar('Loss/Disc', disc_loss, batch_counter)
-    writer.add_scalar('Loss/Train', train_loss, batch_counter)
-    writer.add_scalar('Loss/Val', val_loss, batch_counter)
+
+    # saves the gradients of the generator
+    for tag, value in gen.named_parameters():
+        if value.grad is not None:
+            writer.add_histogram(tag + '/grad/gen', value.grad.cpu(), batch_counter)
+
+    # saves the gradients of the discriminator
+    for tag, value in disc.named_parameters():
+        if value.grad is not None:
+            writer.add_histogram(tag + '/grad/disc', value.grad.cpu(), batch_counter)
+
+    # saves loss to the tensorboard log
+    writer.add_scalar('Disc/Loss', disc_loss, batch_counter)
+    writer.add_scalar('Disc/Accuracy', disc_accuracy, batch_counter)
+
+    writer.add_scalar('Gen_Train/Loss', gen_train_loss, batch_counter)
+    writer.add_scalar('Gen_Train/L2', gen_train_loss_l2, batch_counter)
+    writer.add_scalar('Gen_val/Loss', gen_val_loss, batch_counter)
+    writer.add_scalar('Gen_val/L2', gen_val_loss_l2, batch_counter)
 
     # saves a checkpoint
     checkpoint = {'gen_state': gen.state_dict(),
@@ -95,11 +113,6 @@ def checkpoint(batch_counter,
     val_image = val_image.unsqueeze(0)
     val_image = val_image.cuda()
     val_image = apply_scale(val_image)
-    test_image = dataloader_test.dataset.__getitem__(test_reference_index)
-    test_image = apply_padding(test_image, img_height, single_side)
-    test_image = test_image.unsqueeze(0)
-    test_image = test_image.cuda()
-    test_image = apply_scale(test_image)
 
     # if this is the first epoch we save the reference images
     if batch_counter == 0:
@@ -110,13 +123,11 @@ def checkpoint(batch_counter,
         # validation reference image
         writer.add_image('.Reference Validation Image', val_image.squeeze(0))
         writer.add_image('.Reference Validation Image Mask', apply_mask(val_image.squeeze(0), img_width, single_side))
-        # testing reference image
-        writer.add_image('.Reference Test Image', test_image.squeeze(0))
 
+    # saves the progress of imagse
     with torch.no_grad():
         train_image_gen = gen(apply_mask(train_image, img_width, single_side))
         val_image_gen = gen(apply_mask(val_image, img_width, single_side))
-        test_image_gen = gen(test_image)
 
     train_image_gen = train_image_gen.squeeze(0)
     train_image_gen = apply_scale(train_image_gen)
@@ -127,11 +138,6 @@ def checkpoint(batch_counter,
     val_image_gen = apply_scale(val_image_gen)
     val_image_gen = apply_comp(val_image.squeeze(0), val_image_gen, img_width, single_side)
     writer.add_image('val', val_image_gen, batch_counter)
-
-    test_image_gen = test_image_gen.squeeze(0)
-    test_image_gen = apply_scale(test_image_gen)
-    test_image_gen = apply_comp(test_image.squeeze(0), test_image_gen, img_width, single_side)
-    writer.add_image('test', test_image_gen, batch_counter)
 
     writer.close()
     print('Saved checkpoint')
@@ -164,3 +170,8 @@ def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, opt
         batch_counter = 0
 
     return gen, optimizer_gen, disc, optimizer_disc, batch_counter
+
+
+def gpu_memory():
+    print(f'Allocated memory: {torch.cuda.memory_allocated() / 10**9}')
+
