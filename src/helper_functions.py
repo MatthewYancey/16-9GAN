@@ -54,7 +54,8 @@ def apply_scale(img_tensor, plot=False):
     return img_tensor
 
 
-def checkpoint(batch_counter,
+def checkpoint(i,
+               batch_counter,
                disc_loss,
                disc_accuracy,
                gen_train_loss,
@@ -66,10 +67,8 @@ def checkpoint(batch_counter,
                optimizer_gen,
                disc,
                optimizer_disc,
-               dataloader_train,
-               train_reference_index,
-               dataloader_val,
-               val_reference_index,
+               dataloader,
+               reference_images,
                img_height,
                img_width,
                single_side):
@@ -96,51 +95,41 @@ def checkpoint(batch_counter,
     writer.add_scalar('Gen_val/Loss', gen_val_loss, batch_counter)
     writer.add_scalar('Gen_val/L2', gen_val_loss_l2, batch_counter)
 
-    # saves a checkpoint
-    checkpoint = {'gen_state': gen.state_dict(),
-                  'gen_optimizer': optimizer_gen.state_dict(),
-                  'disc_state': disc.state_dict(),
-                  'disc_optimizer': optimizer_disc.state_dict(),
-                  'batch_counter': batch_counter}
-    torch.save(checkpoint, log_dir + 'checkpoint.pt')
+    # Saves the reference images
+    for image_index in reference_images:
+        image = dataloader.dataset.__getitem__(image_index)
+        image = image.unsqueeze(0)
+        image = image.cuda()
+        image = apply_scale(image)
 
-    # gets images from the dataloader
-    train_image = dataloader_train.dataset.__getitem__(train_reference_index)
-    train_image = train_image.unsqueeze(0)
-    train_image = train_image.cuda()
-    train_image = apply_scale(train_image)
-    val_image = dataloader_val.dataset.__getitem__(val_reference_index)
-    val_image = val_image.unsqueeze(0)
-    val_image = val_image.cuda()
-    val_image = apply_scale(val_image)
+        # if this is the first epoch we save the reference images
+        if batch_counter == 0:
+            print('Saving reference images')
+            # training reference image
+            writer.add_image(f'.Reference Image/{image_index}', image.squeeze(0))
+            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask(image.squeeze(0), img_width, single_side))
 
-    # if this is the first epoch we save the reference images
-    if batch_counter == 0:
-        print('Saving reference images')
-        # training reference image
-        writer.add_image('.Reference Train Image', train_image.squeeze(0))
-        writer.add_image('.Reference Train Image Mask', apply_mask(train_image.squeeze(0), img_width, single_side))
-        # validation reference image
-        writer.add_image('.Reference Validation Image', val_image.squeeze(0))
-        writer.add_image('.Reference Validation Image Mask', apply_mask(val_image.squeeze(0), img_width, single_side))
+        # saves the progress of imagse
+        with torch.no_grad():
+            image_gen = gen(apply_mask(image, img_width, single_side))
 
-    # saves the progress of imagse
-    with torch.no_grad():
-        train_image_gen = gen(apply_mask(train_image, img_width, single_side))
-        val_image_gen = gen(apply_mask(val_image, img_width, single_side))
+        image_gen = image_gen.squeeze(0)
+        image_gen = apply_scale(image_gen)
+        image_gen = apply_comp(image.squeeze(0), image_gen, img_width, single_side)
+        writer.add_image(f'Validation_{image_index}', image_gen, batch_counter)
 
-    train_image_gen = train_image_gen.squeeze(0)
-    train_image_gen = apply_scale(train_image_gen)
-    train_image_gen = apply_comp(train_image.squeeze(0), train_image_gen, img_width, single_side)
-    writer.add_image('train', train_image_gen, batch_counter)
-
-    val_image_gen = val_image_gen.squeeze(0)
-    val_image_gen = apply_scale(val_image_gen)
-    val_image_gen = apply_comp(val_image.squeeze(0), val_image_gen, img_width, single_side)
-    writer.add_image('val', val_image_gen, batch_counter)
+    # saves a checkpoint if we are at a new epoch
+    if i == 0:
+        print('Saving checkpoint at new epoch')
+        checkpoint = {'gen_state': gen.state_dict(),
+                    'gen_optimizer': optimizer_gen.state_dict(),
+                    'disc_state': disc.state_dict(),
+                    'disc_optimizer': optimizer_disc.state_dict(),
+                    'batch_counter': batch_counter}
+        torch.save(checkpoint, log_dir + 'checkpoint.pt')
 
     writer.close()
-    print('Saved checkpoint')
+    print('Saved to tensorboard')
 
 
 def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, optimizer_disc=None):
@@ -173,5 +162,5 @@ def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, opt
 
 
 def gpu_memory():
-    print(f'Allocated memory: {torch.cuda.memory_allocated() / 10**9}')
+    print(f'Allocated memory: {(torch.cuda.memory_allocated() / 10**9):.4f}')
 
