@@ -17,6 +17,3 @@ data_out/validate.zip
 
 # no need to backup the checkpoints or ipython files
 *checkpoint*
-src/*.ipynb
-src/model_GANs.ipynb
-src/model_GANs.ipynb
