@@ -66,7 +66,7 @@ def apply_comp_center(img, img_gen, x_pos, y_pos, square_size):
         left_side = img[:, :, :x_pos]
         middle = torch.cat((img[:, :y_pos, x_pos:x_pos + square_size],
                             img_gen[:, y_pos:y_pos + square_size, x_pos:x_pos + square_size],
-                            img[:, y_pos + square_size:, x_pos:x_pos + square_size]), 2)
+                            img[:, y_pos + square_size:, x_pos:x_pos + square_size]), 1)
         right_side = img[:, :, x_pos + square_size:]
         
         comp_img = torch.cat((left_side,
@@ -199,4 +199,82 @@ def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, opt
 
 def gpu_memory():
     print(f'Allocated memory: {(torch.cuda.memory_allocated() / 10**9):.4f}')
+
+
+def checkpoint_center_mask(i,
+               batch_counter,
+               disc_loss,
+               disc_accuracy,
+               gen_train_loss,
+               gen_train_loss_l2,
+               gen_val_loss,
+               gen_val_loss_l2,
+               log_dir,
+               gen,
+               optimizer_gen,
+               disc,
+               optimizer_disc,
+               dataloader,
+               reference_images,
+               x_pos,
+               y_pos,
+               square_size):
+
+    # opens the writer
+    writer = SummaryWriter(log_dir)
+
+    # saves the gradients of the generator
+    for tag, value in gen.named_parameters():
+        if value.grad is not None:
+            writer.add_histogram('gen/' + tag, value.grad.cpu(), batch_counter)
+
+    # saves the gradients of the discriminator
+    for tag, value in disc.named_parameters():
+        if value.grad is not None:
+            writer.add_histogram('disc/' + tag, value.grad.cpu(), batch_counter)
+
+    # saves loss to the tensorboard log
+    writer.add_scalar('Disc/Loss', disc_loss, batch_counter)
+    writer.add_scalar('Disc/Accuracy', disc_accuracy, batch_counter)
+
+    writer.add_scalar('Gen_Train/Loss', gen_train_loss, batch_counter)
+    writer.add_scalar('Gen_Train/MSE', gen_train_loss_l2, batch_counter)
+    writer.add_scalar('Gen_val/Loss', gen_val_loss, batch_counter)
+    writer.add_scalar('Gen_val/MSE', gen_val_loss_l2, batch_counter)
+
+    # Saves the reference images
+    for image_index in reference_images:
+        image = dataloader.dataset.__getitem__(image_index)
+        image = image.unsqueeze(0)
+        image = image.cuda()
+        image = apply_scale(image)
+
+        # if this is the first epoch we save the reference images
+        if batch_counter == 0:
+            print('Saving reference images')
+            # training reference image
+            writer.add_image(f'.Reference Image/{image_index}', image.squeeze(0))
+            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask_center(image.squeeze(0), x_pos, y_pos, square_size))
+
+        # saves the progress of imagse
+        with torch.no_grad():
+            image_gen = gen(apply_mask_center(image, x_pos, y_pos, square_size))
+
+        image_gen = image_gen.squeeze(0)
+        image_gen = apply_scale(image_gen)
+        image_gen = apply_comp_center(image.squeeze(0), image_gen, x_pos, y_pos, square_size)
+        writer.add_image(f'Validation_{image_index}', image_gen, batch_counter)
+
+    # saves a checkpoint if we are at a new epoch
+    if i == 0:
+        print('Saving checkpoint at new epoch')
+        checkpoint = {'gen_state': gen.state_dict(),
+                    'gen_optimizer': optimizer_gen.state_dict(),
+                    'disc_state': disc.state_dict(),
+                    'disc_optimizer': optimizer_disc.state_dict(),
+                    'batch_counter': batch_counter}
+        torch.save(checkpoint, log_dir + 'checkpoint.pt')
+
+    writer.close()
+    print('Saved to tensorboard')
 

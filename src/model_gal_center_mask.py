@@ -13,11 +13,8 @@ def weights_init(m):
 
 
 class Generator(nn.Module):
-    def __init__(self, img_width, single_side):
+    def __init__(self):
         super(Generator, self).__init__()
-
-        self.img_width = img_width
-        self.single_side = single_side
 
         self.conv1 = nn.Conv2d(3, 64, kernel_size=5, stride=1, padding=2, bias=False)
         self.conv2 = nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False)
@@ -128,11 +125,12 @@ class Generator(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, img_width, single_side):
+    def __init__(self, x_pos, y_pos, square_size):
         super(Discriminator, self).__init__()
 
-        self.img_width = img_width
-        self.single_side = single_side
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        self.square_size = square_size
 
         self.global_disc = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
@@ -181,7 +179,7 @@ class Discriminator(nn.Module):
     def forward(self, x):
         # get outputs from each of the discriminator networks
         global_output = self.global_disc(x)
-        local_output = self.local_disc(x[:, :, :, :self.single_side])
+        local_output = self.local_disc(x[:, :, self.y_pos:self.y_pos + self.square_size, self.x_pos:self.x_pos + self.square_size])
 
         # concatinates the outputs and sends them to the final layer
         # return local_output_right, global_output, local_output_left
