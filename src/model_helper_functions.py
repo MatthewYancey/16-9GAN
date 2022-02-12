@@ -17,11 +17,8 @@ def apply_mask(img_batch, img_width, single_side):
     return img_batch
 
 # applies a mask to the cetner of the image
-def apply_mask_center(img_batch, img_width, single_side):
+def apply_mask_center(img_batch, x_pos, y_pos, square_size):
     # checks if this is a single image or batch
-    x_pos = 200
-    y_pos = 144
-    square_size = 30
     if len(img_batch.shape) > 3:
         img_batch[:, :, y_pos:y_pos + square_size, x_pos:x_pos + square_size] = -1
     else:
@@ -49,6 +46,32 @@ def apply_comp(img, img_gen, img_width, single_side):
         comp_img = torch.cat((img_gen[:, :, :single_side],
                               img[:, :, single_side:(img_width - single_side)],
                               img_gen[:, :, (img_width - single_side):]), 2)
+
+    return comp_img
+
+
+def apply_comp_center(img, img_gen, x_pos, y_pos, square_size):
+    # checks if this is a single image or batch
+    if len(img.shape) > 3:
+        left_side = img[:, :, :, :x_pos]
+        middle = torch.cat((img[:, :, :y_pos, x_pos:x_pos + square_size],
+                            img_gen[:, :, y_pos:y_pos + square_size, x_pos:x_pos + square_size],
+                            img[:, :, y_pos + square_size:, x_pos:x_pos + square_size]), 2)
+        
+        right_side = img[:, :, :, x_pos + square_size:]
+        comp_img = torch.cat((left_side,
+                              middle,
+                              right_side), 3)
+    else:
+        left_side = img[:, :, :x_pos]
+        middle = torch.cat((img[:, :y_pos, x_pos:x_pos + square_size],
+                            img_gen[:, y_pos:y_pos + square_size, x_pos:x_pos + square_size],
+                            img[:, y_pos + square_size:, x_pos:x_pos + square_size]), 2)
+        right_side = img[:, :, x_pos + square_size:]
+        
+        comp_img = torch.cat((left_side,
+                              middle,
+                              right_side), 2)
 
     return comp_img
 
