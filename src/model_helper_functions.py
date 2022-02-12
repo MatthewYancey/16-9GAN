@@ -16,6 +16,19 @@ def apply_mask(img_batch, img_width, single_side):
 
     return img_batch
 
+# applies a mask to the cetner of the image
+def apply_mask_center(img_batch, img_width, single_side):
+    # checks if this is a single image or batch
+    x_pos = 200
+    y_pos = 144
+    square_size = 30
+    if len(img_batch.shape) > 3:
+        img_batch[:, :, y_pos:y_pos + square_size, x_pos:x_pos + square_size] = -1
+    else:
+        img_batch[:, y_pos:y_pos + square_size, x_pos:x_pos + square_size] = -1
+
+    return img_batch
+
 
 # adds -1 padding to the sides of images that are in 4:3 aspect ratio
 def apply_padding(img, img_height, single_side):
