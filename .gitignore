@@ -14,6 +14,8 @@ data_out/anime-faces.tar.gz
 data_out/test.zip
 data_out/train.zip
 data_out/validate.zip
+data_out/data256x256.zip
 
 # no need to backup the checkpoints or ipython files
 *checkpoint*
+

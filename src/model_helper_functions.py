@@ -91,9 +91,9 @@ def checkpoint(i,
     writer.add_scalar('Disc/Accuracy', disc_accuracy, batch_counter)
 
     writer.add_scalar('Gen_Train/Loss', gen_train_loss, batch_counter)
-    writer.add_scalar('Gen_Train/L2', gen_train_loss_l2, batch_counter)
+    writer.add_scalar('Gen_Train/MSE', gen_train_loss_l2, batch_counter)
     writer.add_scalar('Gen_val/Loss', gen_val_loss, batch_counter)
-    writer.add_scalar('Gen_val/L2', gen_val_loss_l2, batch_counter)
+    writer.add_scalar('Gen_val/MSE', gen_val_loss_l2, batch_counter)
 
     # Saves the reference images
     for image_index in reference_images:

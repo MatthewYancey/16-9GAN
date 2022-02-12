@@ -1,5 +1,6 @@
 # how much training is done in the model
 # what kind of Discriminator is ued
+# optimizer adam with 0.001 gen and 0.0001 for discriminator
 
 import torch.nn as nn
 import torch
