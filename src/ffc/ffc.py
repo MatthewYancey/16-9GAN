@@ -34,38 +34,112 @@ class FFCSE_block(nn.Module):
             self.sigmoid(self.conv_a2g(x))
         return x_l, x_g
 
-
 class FourierUnit(nn.Module):
 
-    def __init__(self, in_channels, out_channels, groups=1):
+    def __init__(self, in_channels, out_channels, groups=1, spatial_scale_factor=None, spatial_scale_mode='bilinear',
+                 spectral_pos_encoding=False, use_se=False, se_kwargs=None, ffc3d=False, fft_norm='ortho'):
         # bn_layer not used
         super(FourierUnit, self).__init__()
         self.groups = groups
-        self.conv_layer = torch.nn.Conv2d(in_channels=in_channels * 2, out_channels=out_channels * 2,
+
+        self.conv_layer = torch.nn.Conv2d(in_channels=in_channels * 2 + (2 if spectral_pos_encoding else 0),
+                                          out_channels=out_channels * 2,
                                           kernel_size=1, stride=1, padding=0, groups=self.groups, bias=False)
         self.bn = torch.nn.BatchNorm2d(out_channels * 2)
         self.relu = torch.nn.ReLU(inplace=True)
 
-    def forward(self, x):
-        batch, c, h, w = x.size()
-        r_size = x.size()
+        # squeeze and excitation block
+        self.use_se = use_se
+        if use_se:
+            if se_kwargs is None:
+                se_kwargs = {}
+            self.se = SELayer(self.conv_layer.in_channels, **se_kwargs)
 
+        self.spatial_scale_factor = spatial_scale_factor
+        self.spatial_scale_mode = spatial_scale_mode
+        self.spectral_pos_encoding = spectral_pos_encoding
+        self.ffc3d = ffc3d
+        self.fft_norm = fft_norm
+
+    def forward(self, x):
+        batch = x.shape[0]
+
+        if self.spatial_scale_factor is not None:
+            orig_size = x.shape[-2:]
+            x = F.interpolate(x, scale_factor=self.spatial_scale_factor, mode=self.spatial_scale_mode, align_corners=False)
+
+        r_size = x.size()
         # (batch, c, h, w/2+1, 2)
-        ffted = torch.rfft(x, signal_ndim=2, normalized=True)
-        # (batch, c, 2, h, w/2+1)
-        ffted = ffted.permute(0, 1, 4, 2, 3).contiguous()
+        fft_dim = (-3, -2, -1) if self.ffc3d else (-2, -1)
+        ffted = torch.fft.rfftn(x, dim=fft_dim, norm=self.fft_norm)
+        ffted = torch.stack((ffted.real, ffted.imag), dim=-1)
+        ffted = ffted.permute(0, 1, 4, 2, 3).contiguous()  # (batch, c, 2, h, w/2+1)
         ffted = ffted.view((batch, -1,) + ffted.size()[3:])
+
+        if self.spectral_pos_encoding:
+            height, width = ffted.shape[-2:]
+            coords_vert = torch.linspace(0, 1, height)[None, None, :, None].expand(batch, 1, height, width).to(ffted)
+            coords_hor = torch.linspace(0, 1, width)[None, None, None, :].expand(batch, 1, height, width).to(ffted)
+            ffted = torch.cat((coords_vert, coords_hor, ffted), dim=1)
+
+        if self.use_se:
+            ffted = self.se(ffted)
 
         ffted = self.conv_layer(ffted)  # (batch, c*2, h, w/2+1)
         ffted = self.relu(self.bn(ffted))
 
         ffted = ffted.view((batch, -1, 2,) + ffted.size()[2:]).permute(
             0, 1, 3, 4, 2).contiguous()  # (batch,c, t, h, w/2+1, 2)
+        ffted = torch.complex(ffted[..., 0], ffted[..., 1])
 
-        output = torch.irfft(ffted, signal_ndim=2,
-                             signal_sizes=r_size[2:], normalized=True)
+        ifft_shape_slice = x.shape[-3:] if self.ffc3d else x.shape[-2:]
+        output = torch.fft.irfftn(ffted, s=ifft_shape_slice, dim=fft_dim, norm=self.fft_norm)
+
+        if self.spatial_scale_factor is not None:
+            output = F.interpolate(output, size=orig_size, mode=self.spatial_scale_mode, align_corners=False)
 
         return output
+
+
+
+
+# class FourierUnit(nn.Module):
+
+#     def __init__(self, in_channels, out_channels, groups=1):
+#         # bn_layer not used
+#         super(FourierUnit, self).__init__()
+#         self.groups = groups
+#         self.conv_layer = torch.nn.Conv2d(in_channels=in_channels * 2, out_channels=out_channels * 2,
+#                                           kernel_size=1, stride=1, padding=0, groups=self.groups, bias=False)
+#         self.bn = torch.nn.BatchNorm2d(out_channels * 2)
+#         self.relu = torch.nn.ReLU(inplace=True)
+
+#     def forward(self, x):
+#         batch, c, h, w = x.size()
+#         r_size = x.size()
+
+
+
+#         # (batch, c, h, w/2+1, 2)
+#         print(x.shape)
+#         ffted = torch.fft.rfft(x, norm='forward')
+#         # (batch, c, 2, h, w/2+1)
+#         print(ffted.shape)
+#         ffted = ffted.permute(0, 1, 2, 3).contiguous()
+#         # ffted = ffted.permute(0, 1, 4, 2, 3).contiguous()
+#         # ffted = ffted.view((batch, -1,) + ffted.size()[3:])
+#         print(ffted.shape)
+
+#         ffted = self.conv_layer(ffted)  # (batch, c*2, h, w/2+1)
+#         ffted = self.relu(self.bn(ffted))
+
+#         ffted = ffted.view((batch, -1, 2,) + ffted.size()[2:]).permute(
+#             0, 1, 3, 4, 2).contiguous()  # (batch,c, t, h, w/2+1, 2)
+
+#         output = torch.fft.irfft(ffted, signal_ndim=2,
+#                              signal_sizes=r_size[2:], normalized=True)
+
+#         return output
 
 
 class SpectralTransform(nn.Module):

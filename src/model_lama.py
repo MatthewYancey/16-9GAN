@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch
-import ffc.ffc
+from ffc.ffc import FourierUnit
 
 # custom weights initialization called on netG and netD
 def weights_init(m):
@@ -29,27 +29,26 @@ class Generator(nn.Module):
             nn.BatchNorm2d(256),
             nn.ReLU(),
 
-            ffc.FourierUnit(256, 256),
-            ffc.FourierUnit(256, 256),
-            ffc.FourierUnit(256, 256),
-            ffc.FourierUnit(256, 256),
+            FourierUnit(256, 256),
+            FourierUnit(256, 256),
+            FourierUnit(256, 256),
+            FourierUnit(256, 256),
 
             nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.BatchNorm2d(256),
+            nn.BatchNorm2d(128),
             nn.ReLU(),
 
-            nn.Conv2d(128, 64, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.ConvTranspose2d(128, 64, kernel_size=4, stride=2, padding=1, bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(),
 
-            nn.Conv2d(64, 3, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Tanh(),
-
+            nn.ConvTranspose2d(64, 3, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.Tanh()
         )
 
 
     def forward(self, x):
-        x = self.main(x)
+        x = self.model(x)
         return x
 
 
@@ -87,63 +86,50 @@ class GlobalDiscriminator(nn.Module):
 
 
 class Discriminator(nn.Module):
-    def __init__(self, img_width, single_side, dropout):
+    def __init__(self, img_width, single_side):
         super(Discriminator, self).__init__()
 
         self.img_width = img_width
         self.single_side = single_side
-        self.dropout = dropout
 
         self.global_disc = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(128),
             nn.ReLU(),
             nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(256),
             nn.ReLU(),
             nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
             nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
             nn.Conv2d(512, 1024, kernel_size=(9, 16), stride=1, padding=0, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(1024),
             nn.ReLU()
         )
 
         self.local_disc = nn.Sequential(
             nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(64),
             nn.ReLU(),
             nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(128),
             nn.ReLU(),
             nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(256),
             nn.ReLU(),
             nn.Conv2d(256, 512, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
             nn.Conv2d(512, 512, kernel_size=4, stride=2, padding=1, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(512),
             nn.ReLU(),
             nn.Conv2d(512, 1024, kernel_size=(9, 2), stride=1, padding=0, bias=False),
-            nn.Dropout(self.dropout),
             nn.BatchNorm2d(1024),
             nn.ReLU()
         )
