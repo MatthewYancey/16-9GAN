@@ -1,9 +1,6 @@
-# how much training is done in the model
-# what kind of Discriminator is ued
-# optimizer adam with 0.001 gen and 0.0001 for discriminator
-
 import torch.nn as nn
 import torch
+import ffc.ffc
 
 # custom weights initialization called on netG and netD
 def weights_init(m):
@@ -16,14 +13,43 @@ def weights_init(m):
 
 
 class Generator(nn.Module):
-    def __init__(self, img_width, single_side):
+    def __init__(self):
         super(Generator, self).__init__()
 
-        
+        self.model = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+
+            nn.Conv2d(64, 128, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(128),
+            nn.ReLU(),
+
+            nn.Conv2d(128, 256, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+
+            ffc.FourierUnit(256, 256),
+            ffc.FourierUnit(256, 256),
+            ffc.FourierUnit(256, 256),
+            ffc.FourierUnit(256, 256),
+
+            nn.ConvTranspose2d(256, 128, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+
+            nn.Conv2d(128, 64, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.BatchNorm2d(64),
+            nn.ReLU(),
+
+            nn.Conv2d(64, 3, kernel_size=4, stride=2, padding=1, bias=False),
+            nn.Tanh(),
+
+        )
+
 
     def forward(self, x):
-        x = self.model(x)
-
+        x = self.main(x)
         return x
 
 

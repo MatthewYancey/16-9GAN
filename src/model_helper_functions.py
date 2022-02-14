@@ -78,9 +78,9 @@ def apply_comp_center(img, img_gen, x_pos, y_pos, square_size):
 
 # helper function for converting images to a normal range
 def apply_scale(img_tensor, plot=False):
-    min_value = img_tensor.min()
-    span = img_tensor.max() - img_tensor.min()
-    img_tensor = (img_tensor - min_value) / span
+    # min_value = img_tensor.min()
+    # span = img_tensor.max() - img_tensor.min()
+    img_tensor = (img_tensor - (-1)) / 2
 
     # tensorboard and matplotlib take images in different formats
     if plot:
@@ -136,22 +136,22 @@ def checkpoint(i,
         image = dataloader.dataset.__getitem__(image_index)
         image = image.unsqueeze(0)
         image = image.cuda()
-        image = apply_scale(image)
+        # image = apply_scale(image)
 
         # if this is the first epoch we save the reference images
         if batch_counter == 0:
             print('Saving reference images')
             # training reference image
-            writer.add_image(f'.Reference Image/{image_index}', image.squeeze(0))
-            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask(image.squeeze(0), img_width, single_side))
+            writer.add_image(f'.Reference Image/{image_index}', apply_scale(image.squeeze(0)))
+            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask(apply_scale(image.squeeze(0)), img_width, single_side))
 
         # saves the progress of imagse
         with torch.no_grad():
             image_gen = gen(apply_mask(image, img_width, single_side))
 
         image_gen = image_gen.squeeze(0)
-        image_gen = apply_scale(image_gen)
         image_gen = apply_comp(image.squeeze(0), image_gen, img_width, single_side)
+        image_gen = apply_scale(image_gen)
         writer.add_image(f'Validation_{image_index}', image_gen, batch_counter)
 
     # saves a checkpoint if we are at a new epoch
@@ -247,22 +247,22 @@ def checkpoint_center_mask(i,
         image = dataloader.dataset.__getitem__(image_index)
         image = image.unsqueeze(0)
         image = image.cuda()
-        image = apply_scale(image)
+        # image = apply_scale(image)
 
         # if this is the first epoch we save the reference images
         if batch_counter == 0:
             print('Saving reference images')
             # training reference image
-            writer.add_image(f'.Reference Image/{image_index}', image.squeeze(0))
-            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask_center(image.squeeze(0), x_pos, y_pos, square_size))
+            writer.add_image(f'.Reference Image/{image_index}', apply_scale(image).squeeze(0))
+            writer.add_image(f'.Reference Image Mask/{image_index}', apply_mask_center(apply_scale(image).squeeze(0), x_pos, y_pos, square_size))
 
         # saves the progress of imagse
         with torch.no_grad():
             image_gen = gen(apply_mask_center(image, x_pos, y_pos, square_size))
 
         image_gen = image_gen.squeeze(0)
-        image_gen = apply_scale(image_gen)
         image_gen = apply_comp_center(image.squeeze(0), image_gen, x_pos, y_pos, square_size)
+        image_gen = apply_scale(image_gen)
         writer.add_image(f'Validation_{image_index}', image_gen, batch_counter)
 
     # saves a checkpoint if we are at a new epoch

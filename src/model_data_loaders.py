@@ -34,7 +34,8 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
     dataset = ReadFromList(img_list, transform=transforms.Compose([
         # transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+        ]))
     dataloader_train = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle_images, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_train.dataset)}')
 
@@ -46,7 +47,8 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
     dataset = ReadFromList(img_list, transform=transforms.Compose([
         # transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+        ]))
 
     dataloader_val = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle_images, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_val.dataset)}')
@@ -59,7 +61,8 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
     dataset = ReadFromList(img_list, transform=transforms.Compose([
         # transforms.RandomHorizontalFlip(p=0.5),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)), ]))
+        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
+        ]))
 
     dataloader_test = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle_images, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_test.dataset)}')
