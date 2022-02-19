@@ -197,6 +197,15 @@ def load_checkpoint(prev_checkpoint, log_dir, gen, optimizer_gen, disc=None, opt
     return gen, optimizer_gen, disc, optimizer_disc, batch_counter
 
 
+def load_checkpoint_inference(prev_checkpoint, gen):
+    if prev_checkpoint is not None:
+        # loads the model weights
+        checkpoint = torch.load(prev_checkpoint)
+        gen.load_state_dict(checkpoint['gen_state'])
+        print(f'Loaded checkpoint from {prev_checkpoint}')
+
+    return gen
+
 def gpu_memory():
     print(f'Allocated memory: {(torch.cuda.memory_allocated() / 10**9):.4f}')
 

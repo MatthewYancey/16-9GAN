@@ -22,13 +22,12 @@ class ReadFromList(Dataset):
         return image
 
 
-def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_dir_test, dataset_size, shuffle_images=True):
+def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_dir_test, shuffle_images=True):
     # training dataset
     img_list = glob.glob(img_dir_train + '*')
     img_list.sort()
     print('Training Dataset')
     print(f'Number of images: {len(img_list)}')
-    img_list = img_list[:dataset_size]
 
     # makes the dataset and data loader
     dataset = ReadFromList(img_list, transform=transforms.Compose([
@@ -63,6 +62,7 @@ def create_dataloaders(batch_size, n_workers, img_dir_train, img_dir_val, img_di
         transforms.ToTensor(),
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
         ]))
+    print('no transform')
 
     dataloader_test = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle_images, num_workers=n_workers)
     print(f'Size of dataset: {len(dataloader_test.dataset)}')

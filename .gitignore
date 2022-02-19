@@ -16,6 +16,9 @@ data_out/test.zip
 data_out/train.zip
 data_out/validate.zip
 data_out/data256x256.zip
+data_out/example_output
+data_out/example_output_model
+data_out/test_output
 
 # no need to backup the checkpoints or ipython files
 *checkpoint*
