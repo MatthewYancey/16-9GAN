@@ -1,6 +1,8 @@
-### GANIME (**Generative Adversarial Networks In Motion Entertainment**)
+### GANIME: Generative Adversarial Networks In Motion Entertainment
 
+<p align="center">
 ![](visuals/gif02.gif)
+</p>
 
 GANime explores a series of GAN methods for converting old 4:3 aspect ratio anime to 16:9 by using image inpainting.
 
