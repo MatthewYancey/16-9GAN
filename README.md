@@ -1,13 +1,13 @@
 ![](visuals/logo.webp)
 <small>_generated with DALL-E_</small>
 
-### GANIME
+### GANIME (**Generative Adversarial Networks In Motion Entertainment**)
 
-Using Generative Advisarial Networks to convert anime from 4:3 to 16:9
+GANime explores a sereis of GAN methods for converting old 4:3 aspect ratio anime to 16:9.
 
-## What is this repo?
+![](visuals/image03.png)
 
-GANime explores a sereis of methods for converting old 4:3 aspect ratio anime to 16:9. In this repo I go through 3 different methods from papers explor how well they work .The papares I used are the following:
+In this repo I create 3 different models based on 3 papers to explore how well their methods work. The papares I used are the following:
 
 _Context Encoders: Feature Learning by Inpainting (Pathak, Krähenbühl, Donahue, Darrell, Efros) CVPR 2016_
 
@@ -21,19 +21,53 @@ Traditional convertion of animation to 16:9 involves cropping out the top and bo
 
 ![](visuals/image01.png)
 
-## How
+**Why GANs and not Stable Diffusion?**
 
-### Data
+When I started this project Stable Diffusion hadn't taken off yet. Also, the name GANIME was too perfect to pass up!
 
-I chose to keep the training set to that of the Pokemon anime. I did this for two reason. First, Pokemon has episodes that are in both 4:3 and 16:9 format. Second, this kept the style and color pallet to a single show meaning that the model won't have to generalize as much.
+## Data
 
-### Code & Tech Stack
+I chose to keep the training set to that of the Pokemon series. I did this for two reason. First, Pokemon has episodes that are in both 4:3 and 16:9 format. Second, this kept the style and color pallet to a single show, minimizing the ammount of generalization the model will have to do.
+
+## Code, Training, and Tracking
 
 ![](visuals/image02.png)
+
 I coded all models from scratch using Pytorch (with the exception of LaMa).
 Training was done using Google Colab Pro which provided an NVIDIA Tesla V100 that has ~7.5 Teraflops. Results were logged and visualized using TensorBoard.
 
 ## Results
+
+### Still Images
+
+![](visuals/image04.png)
+<small>_Output from each of the three models_</small>
+
+Model 1 does very little beyond just extending blured collors into the masked area.
+
+Model 2 included the addition of dialation and the use of a local and global discriminator.
+Overall results are much better and we see some sense of object completion, such as Ash's ear.
+
+Model 3 or the LaMa model does the best especially when it comes to identifying patters. This is becuase the LaMa model uses Fourier Convolutions that essentially identify th repeating patters in images. Below are some of the best and worst cases from Model 3.
+
+![](visuals/image05.png)
+Model 3 does well with patters such as the wood flooring, but struggles with faces or anatimy.
+
+### LPIP scores
+
+LPIPS (Learned Perceptual Image Patch Similarity) is a metric used for calculating the effecitiveness of image inpainting. This loss is calculated on the difference of feature vectors of the images and not difference of the pixels. Not surprisingly, the LaMa model has the best LPIPS score.
+
+| &nbsp;     | Model 1 | Model 2 | Model 3 |
+| ---------- | ------- | ------- | ------- |
+| LPIP Score | 0.146   | 0.139   | 0.099   |
+
+### Video
+
+![](visuals/gif01.gif)
+
+## Takaways and Next Steps
+
+No effert is done to make the images temperally cohisive.
 
 ## Challenges we ran into
 
